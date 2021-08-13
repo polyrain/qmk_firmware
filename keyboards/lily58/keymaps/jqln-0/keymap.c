@@ -107,7 +107,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 // rules.mk
 #ifdef OLED_DRIVER_ENABLE
 
-#define ANIM_FRAMES (8)
+#define ANIM_FRAMES (2)
 #define ANIM_FRAME_DIMENSIONS (512)
 
 uint8_t current_frame = 0;
@@ -288,6 +288,8 @@ const char *read_keylogs(void);
 
 void oled_task_user(void) {
   if (is_keyboard_master()) {
+    render_bongo_cat();
+  } else {
     // If you want to change the display of OLED, you need to change here
     oled_write_ln(read_layer_state(), false);
     oled_write_ln(read_keylog(), false);
@@ -295,8 +297,6 @@ void oled_task_user(void) {
     // oled_write_ln(read_mode_icon(keymap_config.swap_lalt_lgui), false);
     // oled_write_ln(read_host_led_state(), false);
     // oled_write_ln(read_timelog(), false);
-  } else {
-    render_bongo_cat();
   }
 }
 #endif  // OLED_DRIVER_ENABLE
